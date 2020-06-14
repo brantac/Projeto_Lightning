@@ -67,8 +67,8 @@ PontoVirgula:           ';';
 ID:                     [a-zA-Z][a-zA-Z0-9]*;
 
 /* NumeroLiteral */
-InteiroLiteral:         [0-9][0-9]*;
-RealLiteral:            [0-9][0-9]*.[0-9][0-9]*;
+InteiroLiteral:         [-]?[0-9]+;
+RealLiteral:            [-]?[0-9]+[.][0-9]+;
 
 SEP: [ \t\r\n]+ -> skip;
 
