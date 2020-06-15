@@ -17,9 +17,10 @@ public class LightningParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, T__11=12, T__12=13, BOOLEANO=14, INTEIRO=15, CADEIA=16, 
-		CARACTER=17, REAL=18, BooleanoLiteral=19, PontoVirgula=20, ID=21, InteiroLiteral=22, 
-		RealLiteral=23, SEP=24;
+		T__9=10, T__10=11, T__11=12, T__12=13, ComentarioDeUmaLinha=14, BOOLEANO=15, 
+		INTEIRO=16, CADEIA=17, CARACTER=18, REAL=19, BooleanoLiteral=20, PontoVirgula=21, 
+		CadeiaLiteral=22, CaracterLiteral=23, ID=24, InteiroLiteral=25, RealLiteral=26, 
+		SEP=27;
 	public static final int
 		RULE_declaracao = 0, RULE_listaDeDeclaracaoDeVariaveis = 1, RULE_tipoDaVariavel = 2, 
 		RULE_declaracaoDaVariavel = 3, RULE_atribuivel = 4, RULE_expressaoUnica = 5, 
@@ -35,7 +36,7 @@ public class LightningParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "','", "'='", "'*'", "'/'", "'%'", "'+'", "'-'", "'=='", "'!='", 
-			"'<'", "'>'", "'<='", "'>='", "'booleano'", "'inteiro'", "'cadeia'", 
+			"'<'", "'>'", "'<='", "'>='", null, "'booleano'", "'inteiro'", "'cadeia'", 
 			"'caracter'", "'real'", null, "';'"
 		};
 	}
@@ -43,8 +44,9 @@ public class LightningParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, "BOOLEANO", "INTEIRO", "CADEIA", "CARACTER", "REAL", "BooleanoLiteral", 
-			"PontoVirgula", "ID", "InteiroLiteral", "RealLiteral", "SEP"
+			null, null, "ComentarioDeUmaLinha", "BOOLEANO", "INTEIRO", "CADEIA", 
+			"CARACTER", "REAL", "BooleanoLiteral", "PontoVirgula", "CadeiaLiteral", 
+			"CaracterLiteral", "ID", "InteiroLiteral", "RealLiteral", "SEP"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -349,10 +351,10 @@ public class LightningParser extends Parser {
 	}
 
 	public static class ExpressaoUnicaContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(LightningParser.ID, 0); }
 		public LiteralContext literal() {
 			return getRuleContext(LiteralContext.class,0);
 		}
+		public TerminalNode ID() { return getToken(LightningParser.ID, 0); }
 		public List<ExpressaoUnicaContext> expressaoUnica() {
 			return getRuleContexts(ExpressaoUnicaContext.class);
 		}
@@ -392,18 +394,20 @@ public class LightningParser extends Parser {
 			setState(42);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case ID:
-				{
-				setState(40);
-				match(ID);
-				}
-				break;
 			case BooleanoLiteral:
+			case CadeiaLiteral:
+			case CaracterLiteral:
 			case InteiroLiteral:
 			case RealLiteral:
 				{
-				setState(41);
+				setState(40);
 				literal();
+				}
+				break;
+			case ID:
+				{
+				setState(41);
+				match(ID);
 				}
 				break;
 			default:
@@ -534,6 +538,8 @@ public class LightningParser extends Parser {
 	}
 
 	public static class LiteralContext extends ParserRuleContext {
+		public TerminalNode CadeiaLiteral() { return getToken(LightningParser.CadeiaLiteral, 0); }
+		public TerminalNode CaracterLiteral() { return getToken(LightningParser.CaracterLiteral, 0); }
 		public TerminalNode BooleanoLiteral() { return getToken(LightningParser.BooleanoLiteral, 0); }
 		public NumeroLiteralContext numeroLiteral() {
 			return getRuleContext(NumeroLiteralContext.class,0);
@@ -556,21 +562,35 @@ public class LightningParser extends Parser {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_literal);
 		try {
-			setState(66);
+			setState(68);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case BooleanoLiteral:
+			case CadeiaLiteral:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(64);
+				match(CadeiaLiteral);
+				}
+				break;
+			case CaracterLiteral:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(65);
+				match(CaracterLiteral);
+				}
+				break;
+			case BooleanoLiteral:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(66);
 				match(BooleanoLiteral);
 				}
 				break;
 			case InteiroLiteral:
 			case RealLiteral:
-				enterOuterAlt(_localctx, 2);
+				enterOuterAlt(_localctx, 4);
 				{
-				setState(65);
+				setState(67);
 				numeroLiteral();
 				}
 				break;
@@ -613,7 +633,7 @@ public class LightningParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(68);
+			setState(70);
 			_la = _input.LA(1);
 			if ( !(_la==InteiroLiteral || _la==RealLiteral) ) {
 			_errHandler.recoverInline(this);
@@ -658,7 +678,7 @@ public class LightningParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
+			setState(72);
 			match(PontoVirgula);
 			}
 		}
@@ -697,25 +717,26 @@ public class LightningParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\32K\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35M\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\2"+
 		"\3\3\3\3\3\3\3\3\7\3\34\n\3\f\3\16\3\37\13\3\3\4\3\4\3\5\3\5\3\5\5\5&"+
 		"\n\5\3\6\3\6\3\7\3\7\3\7\5\7-\n\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7"+
-		"\3\7\3\7\3\7\3\7\3\7\3\7\7\7>\n\7\f\7\16\7A\13\7\3\b\3\b\5\bE\n\b\3\t"+
-		"\3\t\3\n\3\n\3\n\2\3\f\13\2\4\6\b\n\f\16\20\22\2\b\3\2\20\24\3\2\5\7\3"+
-		"\2\b\t\3\2\n\13\3\2\f\17\3\2\30\31\2J\2\24\3\2\2\2\4\27\3\2\2\2\6 \3\2"+
-		"\2\2\b\"\3\2\2\2\n\'\3\2\2\2\f,\3\2\2\2\16D\3\2\2\2\20F\3\2\2\2\22H\3"+
-		"\2\2\2\24\25\5\4\3\2\25\26\5\22\n\2\26\3\3\2\2\2\27\30\5\6\4\2\30\35\5"+
-		"\b\5\2\31\32\7\3\2\2\32\34\5\b\5\2\33\31\3\2\2\2\34\37\3\2\2\2\35\33\3"+
-		"\2\2\2\35\36\3\2\2\2\36\5\3\2\2\2\37\35\3\2\2\2 !\t\2\2\2!\7\3\2\2\2\""+
-		"%\5\n\6\2#$\7\4\2\2$&\5\f\7\2%#\3\2\2\2%&\3\2\2\2&\t\3\2\2\2\'(\7\27\2"+
-		"\2(\13\3\2\2\2)*\b\7\1\2*-\7\27\2\2+-\5\16\b\2,)\3\2\2\2,+\3\2\2\2-?\3"+
-		"\2\2\2./\f\t\2\2/\60\t\3\2\2\60>\5\f\7\n\61\62\f\b\2\2\62\63\t\4\2\2\63"+
-		">\5\f\7\t\64\65\f\7\2\2\65\66\t\5\2\2\66>\5\f\7\b\678\f\6\2\289\t\6\2"+
-		"\29>\5\f\7\7:;\f\5\2\2;<\7\4\2\2<>\5\f\7\6=.\3\2\2\2=\61\3\2\2\2=\64\3"+
-		"\2\2\2=\67\3\2\2\2=:\3\2\2\2>A\3\2\2\2?=\3\2\2\2?@\3\2\2\2@\r\3\2\2\2"+
-		"A?\3\2\2\2BE\7\25\2\2CE\5\20\t\2DB\3\2\2\2DC\3\2\2\2E\17\3\2\2\2FG\t\7"+
-		"\2\2G\21\3\2\2\2HI\7\26\2\2I\23\3\2\2\2\b\35%,=?D";
+		"\3\7\3\7\3\7\3\7\3\7\3\7\7\7>\n\7\f\7\16\7A\13\7\3\b\3\b\3\b\3\b\5\bG"+
+		"\n\b\3\t\3\t\3\n\3\n\3\n\2\3\f\13\2\4\6\b\n\f\16\20\22\2\b\3\2\21\25\3"+
+		"\2\5\7\3\2\b\t\3\2\n\13\3\2\f\17\3\2\33\34\2N\2\24\3\2\2\2\4\27\3\2\2"+
+		"\2\6 \3\2\2\2\b\"\3\2\2\2\n\'\3\2\2\2\f,\3\2\2\2\16F\3\2\2\2\20H\3\2\2"+
+		"\2\22J\3\2\2\2\24\25\5\4\3\2\25\26\5\22\n\2\26\3\3\2\2\2\27\30\5\6\4\2"+
+		"\30\35\5\b\5\2\31\32\7\3\2\2\32\34\5\b\5\2\33\31\3\2\2\2\34\37\3\2\2\2"+
+		"\35\33\3\2\2\2\35\36\3\2\2\2\36\5\3\2\2\2\37\35\3\2\2\2 !\t\2\2\2!\7\3"+
+		"\2\2\2\"%\5\n\6\2#$\7\4\2\2$&\5\f\7\2%#\3\2\2\2%&\3\2\2\2&\t\3\2\2\2\'"+
+		"(\7\32\2\2(\13\3\2\2\2)*\b\7\1\2*-\5\16\b\2+-\7\32\2\2,)\3\2\2\2,+\3\2"+
+		"\2\2-?\3\2\2\2./\f\t\2\2/\60\t\3\2\2\60>\5\f\7\n\61\62\f\b\2\2\62\63\t"+
+		"\4\2\2\63>\5\f\7\t\64\65\f\7\2\2\65\66\t\5\2\2\66>\5\f\7\b\678\f\6\2\2"+
+		"89\t\6\2\29>\5\f\7\7:;\f\5\2\2;<\7\4\2\2<>\5\f\7\6=.\3\2\2\2=\61\3\2\2"+
+		"\2=\64\3\2\2\2=\67\3\2\2\2=:\3\2\2\2>A\3\2\2\2?=\3\2\2\2?@\3\2\2\2@\r"+
+		"\3\2\2\2A?\3\2\2\2BG\7\30\2\2CG\7\31\2\2DG\7\26\2\2EG\5\20\t\2FB\3\2\2"+
+		"\2FC\3\2\2\2FD\3\2\2\2FE\3\2\2\2G\17\3\2\2\2HI\t\7\2\2I\21\3\2\2\2JK\7"+
+		"\27\2\2K\23\3\2\2\2\b\35%,=?F";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

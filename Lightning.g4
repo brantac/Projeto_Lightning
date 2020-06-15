@@ -1,5 +1,6 @@
 grammar Lightning;
 // Regras de Producao
+
 declaracao: listaDeDeclaracaoDeVariaveis fdi;
 
 listaDeDeclaracaoDeVariaveis
@@ -28,29 +29,28 @@ expressaoUnica
     |   expressaoUnica ('==' | '!=') expressaoUnica
     |   expressaoUnica ('<' | '>' | '<=' | '>=') expressaoUnica
     |   expressaoUnica '=' expressaoUnica
-    |   ID
     |   literal
+    |   ID
     ;
 
 literal
-    :   BooleanoLiteral
+    :   CadeiaLiteral
+    |   CaracterLiteral
+    |   BooleanoLiteral
     |   numeroLiteral
-    // |   cadeiaLiteral
     ;
 
 numeroLiteral
     :   InteiroLiteral
     |   RealLiteral
     ;
-
-// cadeiaLiteral
-//     :   '"' (~["])* '"'
-//     ;
-//     :   ('"' CadeiaDeCaracter* '"')
     
 fdi:    PontoVirgula;
 
+// --------------------------------------------------------
 // Terminais
+ComentarioDeUmaLinha: '//' ~[\r\n]* -> channel(HIDDEN);
+
 BOOLEANO:               'booleano';
 INTEIRO:                'inteiro';
 CADEIA:                 'cadeia';
@@ -63,6 +63,16 @@ BooleanoLiteral:        'true' | 'false';
 /* Fim da instrução */
 PontoVirgula:           ';';
 
+/* Cadeia literal com aspas duplas */
+CadeiaLiteral
+    :   '"' (~["\\\r\n])* '"'
+    ;
+
+/* Caracter literal */
+CaracterLiteral
+    :   '\'' (~["\\\r\n]) '\''
+    ;
+
 /* Identificador */
 ID:                     [a-zA-Z][a-zA-Z0-9]*;
 
@@ -72,5 +82,3 @@ RealLiteral:            [-]?[0-9]+[.][0-9]+;
 
 SEP: [ \t\r\n]+ -> skip;
 
-/* Cadeia de Caracter */
-// CadeiaDeCaracter:       ~["];
