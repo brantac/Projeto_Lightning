@@ -17,18 +17,22 @@ public class LightningParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, T__11=12, T__12=13, ComentarioDeUmaLinha=14, BOOLEANO=15, 
-		INTEIRO=16, CADEIA=17, CARACTER=18, REAL=19, BooleanoLiteral=20, PontoVirgula=21, 
-		CadeiaLiteral=22, CaracterLiteral=23, ID=24, InteiroLiteral=25, RealLiteral=26, 
-		SEP=27;
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
+		ComentarioDeUmaLinha=18, BOOLEANO=19, INTEIRO=20, CADEIA=21, CARACTER=22, 
+		REAL=23, SE=24, SenaoSe=25, BooleanoLiteral=26, PontoVirgula=27, CadeiaLiteral=28, 
+		CaracterLiteral=29, ID=30, InteiroLiteral=31, RealLiteral=32, SEP=33;
 	public static final int
 		RULE_declaracao = 0, RULE_listaDeDeclaracaoDeVariaveis = 1, RULE_tipoDaVariavel = 2, 
-		RULE_declaracaoDaVariavel = 3, RULE_atribuivel = 4, RULE_expressaoUnica = 5, 
-		RULE_literal = 6, RULE_numeroLiteral = 7, RULE_fdi = 8;
+		RULE_declaracaoDaVariavel = 3, RULE_atribuivel = 4, RULE_expressaoEmSequencia = 5, 
+		RULE_expressaoUnica = 6, RULE_literal = 7, RULE_numeroLiteral = 8, RULE_instrucao = 9, 
+		RULE_bloco = 10, RULE_listaDeInstrucoes = 11, RULE_instrucaoSE = 12, RULE_instrucaoVazia = 13, 
+		RULE_fdi = 14;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"declaracao", "listaDeDeclaracaoDeVariaveis", "tipoDaVariavel", "declaracaoDaVariavel", 
-			"atribuivel", "expressaoUnica", "literal", "numeroLiteral", "fdi"
+			"atribuivel", "expressaoEmSequencia", "expressaoUnica", "literal", "numeroLiteral", 
+			"instrucao", "bloco", "listaDeInstrucoes", "instrucaoSE", "instrucaoVazia", 
+			"fdi"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -36,17 +40,19 @@ public class LightningParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "','", "'='", "'*'", "'/'", "'%'", "'+'", "'-'", "'=='", "'!='", 
-			"'<'", "'>'", "'<='", "'>='", null, "'booleano'", "'inteiro'", "'cadeia'", 
-			"'caracter'", "'real'", null, "';'"
+			"'<'", "'>'", "'<='", "'>='", "'{'", "'}'", "'('", "')'", null, "'booleano'", 
+			"'inteiro'", "'cadeia'", "'caracter'", "'real'", "'se'", "'senaose'", 
+			null, "';'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, "ComentarioDeUmaLinha", "BOOLEANO", "INTEIRO", "CADEIA", 
-			"CARACTER", "REAL", "BooleanoLiteral", "PontoVirgula", "CadeiaLiteral", 
-			"CaracterLiteral", "ID", "InteiroLiteral", "RealLiteral", "SEP"
+			null, null, null, null, null, null, "ComentarioDeUmaLinha", "BOOLEANO", 
+			"INTEIRO", "CADEIA", "CARACTER", "REAL", "SE", "SenaoSe", "BooleanoLiteral", 
+			"PontoVirgula", "CadeiaLiteral", "CaracterLiteral", "ID", "InteiroLiteral", 
+			"RealLiteral", "SEP"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -127,9 +133,9 @@ public class LightningParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(18);
+			setState(30);
 			listaDeDeclaracaoDeVariaveis();
-			setState(19);
+			setState(31);
 			fdi();
 			}
 		}
@@ -175,23 +181,23 @@ public class LightningParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(21);
+			setState(33);
 			tipoDaVariavel();
-			setState(22);
+			setState(34);
 			declaracaoDaVariavel();
-			setState(27);
+			setState(39);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T__0) {
 				{
 				{
-				setState(23);
+				setState(35);
 				match(T__0);
-				setState(24);
+				setState(36);
 				declaracaoDaVariavel();
 				}
 				}
-				setState(29);
+				setState(41);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -235,7 +241,7 @@ public class LightningParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(30);
+			setState(42);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEANO) | (1L << INTEIRO) | (1L << CADEIA) | (1L << CARACTER) | (1L << REAL))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -286,16 +292,16 @@ public class LightningParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(32);
+			setState(44);
 			atribuivel();
-			setState(35);
+			setState(47);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__1) {
 				{
-				setState(33);
+				setState(45);
 				match(T__1);
-				setState(34);
+				setState(46);
 				expressaoUnica(0);
 				}
 			}
@@ -335,8 +341,67 @@ public class LightningParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(37);
+			setState(49);
 			match(ID);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ExpressaoEmSequenciaContext extends ParserRuleContext {
+		public List<ExpressaoUnicaContext> expressaoUnica() {
+			return getRuleContexts(ExpressaoUnicaContext.class);
+		}
+		public ExpressaoUnicaContext expressaoUnica(int i) {
+			return getRuleContext(ExpressaoUnicaContext.class,i);
+		}
+		public ExpressaoEmSequenciaContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_expressaoEmSequencia; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).enterExpressaoEmSequencia(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).exitExpressaoEmSequencia(this);
+		}
+	}
+
+	public final ExpressaoEmSequenciaContext expressaoEmSequencia() throws RecognitionException {
+		ExpressaoEmSequenciaContext _localctx = new ExpressaoEmSequenciaContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_expressaoEmSequencia);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(51);
+			expressaoUnica(0);
+			setState(56);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==T__0) {
+				{
+				{
+				setState(52);
+				match(T__0);
+				setState(53);
+				expressaoUnica(0);
+				}
+				}
+				setState(58);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -384,14 +449,14 @@ public class LightningParser extends Parser {
 		int _parentState = getState();
 		ExpressaoUnicaContext _localctx = new ExpressaoUnicaContext(_ctx, _parentState);
 		ExpressaoUnicaContext _prevctx = _localctx;
-		int _startState = 10;
-		enterRecursionRule(_localctx, 10, RULE_expressaoUnica, _p);
+		int _startState = 12;
+		enterRecursionRule(_localctx, 12, RULE_expressaoUnica, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(42);
+			setState(62);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case BooleanoLiteral:
@@ -400,13 +465,13 @@ public class LightningParser extends Parser {
 			case InteiroLiteral:
 			case RealLiteral:
 				{
-				setState(40);
+				setState(60);
 				literal();
 				}
 				break;
 			case ID:
 				{
-				setState(41);
+				setState(61);
 				match(ID);
 				}
 				break;
@@ -414,24 +479,24 @@ public class LightningParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(61);
+			setState(81);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(59);
+					setState(79);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExpressaoUnicaContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expressaoUnica);
-						setState(44);
+						setState(64);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(45);
+						setState(65);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4))) != 0)) ) {
 						_errHandler.recoverInline(this);
@@ -441,7 +506,7 @@ public class LightningParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(46);
+						setState(66);
 						expressaoUnica(8);
 						}
 						break;
@@ -449,9 +514,9 @@ public class LightningParser extends Parser {
 						{
 						_localctx = new ExpressaoUnicaContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expressaoUnica);
-						setState(47);
+						setState(67);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(48);
+						setState(68);
 						_la = _input.LA(1);
 						if ( !(_la==T__5 || _la==T__6) ) {
 						_errHandler.recoverInline(this);
@@ -461,7 +526,7 @@ public class LightningParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(49);
+						setState(69);
 						expressaoUnica(7);
 						}
 						break;
@@ -469,9 +534,9 @@ public class LightningParser extends Parser {
 						{
 						_localctx = new ExpressaoUnicaContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expressaoUnica);
-						setState(50);
+						setState(70);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(51);
+						setState(71);
 						_la = _input.LA(1);
 						if ( !(_la==T__7 || _la==T__8) ) {
 						_errHandler.recoverInline(this);
@@ -481,7 +546,7 @@ public class LightningParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(52);
+						setState(72);
 						expressaoUnica(6);
 						}
 						break;
@@ -489,9 +554,9 @@ public class LightningParser extends Parser {
 						{
 						_localctx = new ExpressaoUnicaContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expressaoUnica);
-						setState(53);
+						setState(73);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(54);
+						setState(74);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << T__12))) != 0)) ) {
 						_errHandler.recoverInline(this);
@@ -501,7 +566,7 @@ public class LightningParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(55);
+						setState(75);
 						expressaoUnica(5);
 						}
 						break;
@@ -509,20 +574,20 @@ public class LightningParser extends Parser {
 						{
 						_localctx = new ExpressaoUnicaContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expressaoUnica);
-						setState(56);
+						setState(76);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(57);
+						setState(77);
 						match(T__1);
-						setState(58);
+						setState(78);
 						expressaoUnica(4);
 						}
 						break;
 					}
 					} 
 				}
-				setState(63);
+				setState(83);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
 			}
 		}
@@ -560,29 +625,29 @@ public class LightningParser extends Parser {
 
 	public final LiteralContext literal() throws RecognitionException {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_literal);
+		enterRule(_localctx, 14, RULE_literal);
 		try {
-			setState(68);
+			setState(88);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case CadeiaLiteral:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(64);
+				setState(84);
 				match(CadeiaLiteral);
 				}
 				break;
 			case CaracterLiteral:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(65);
+				setState(85);
 				match(CaracterLiteral);
 				}
 				break;
 			case BooleanoLiteral:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(66);
+				setState(86);
 				match(BooleanoLiteral);
 				}
 				break;
@@ -590,7 +655,7 @@ public class LightningParser extends Parser {
 			case RealLiteral:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(67);
+				setState(87);
 				numeroLiteral();
 				}
 				break;
@@ -628,12 +693,12 @@ public class LightningParser extends Parser {
 
 	public final NumeroLiteralContext numeroLiteral() throws RecognitionException {
 		NumeroLiteralContext _localctx = new NumeroLiteralContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_numeroLiteral);
+		enterRule(_localctx, 16, RULE_numeroLiteral);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
+			setState(90);
 			_la = _input.LA(1);
 			if ( !(_la==InteiroLiteral || _la==RealLiteral) ) {
 			_errHandler.recoverInline(this);
@@ -643,6 +708,275 @@ public class LightningParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class InstrucaoContext extends ParserRuleContext {
+		public BlocoContext bloco() {
+			return getRuleContext(BlocoContext.class,0);
+		}
+		public InstrucaoSEContext instrucaoSE() {
+			return getRuleContext(InstrucaoSEContext.class,0);
+		}
+		public InstrucaoVaziaContext instrucaoVazia() {
+			return getRuleContext(InstrucaoVaziaContext.class,0);
+		}
+		public InstrucaoContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_instrucao; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).enterInstrucao(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).exitInstrucao(this);
+		}
+	}
+
+	public final InstrucaoContext instrucao() throws RecognitionException {
+		InstrucaoContext _localctx = new InstrucaoContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_instrucao);
+		try {
+			setState(95);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__13:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(92);
+				bloco();
+				}
+				break;
+			case SE:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(93);
+				instrucaoSE();
+				}
+				break;
+			case PontoVirgula:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(94);
+				instrucaoVazia();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class BlocoContext extends ParserRuleContext {
+		public ListaDeInstrucoesContext listaDeInstrucoes() {
+			return getRuleContext(ListaDeInstrucoesContext.class,0);
+		}
+		public BlocoContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_bloco; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).enterBloco(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).exitBloco(this);
+		}
+	}
+
+	public final BlocoContext bloco() throws RecognitionException {
+		BlocoContext _localctx = new BlocoContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_bloco);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(97);
+			match(T__13);
+			setState(98);
+			listaDeInstrucoes();
+			setState(99);
+			match(T__14);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ListaDeInstrucoesContext extends ParserRuleContext {
+		public List<InstrucaoContext> instrucao() {
+			return getRuleContexts(InstrucaoContext.class);
+		}
+		public InstrucaoContext instrucao(int i) {
+			return getRuleContext(InstrucaoContext.class,i);
+		}
+		public ListaDeInstrucoesContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_listaDeInstrucoes; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).enterListaDeInstrucoes(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).exitListaDeInstrucoes(this);
+		}
+	}
+
+	public final ListaDeInstrucoesContext listaDeInstrucoes() throws RecognitionException {
+		ListaDeInstrucoesContext _localctx = new ListaDeInstrucoesContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_listaDeInstrucoes);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(102); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(101);
+				instrucao();
+				}
+				}
+				setState(104); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__13) | (1L << SE) | (1L << PontoVirgula))) != 0) );
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class InstrucaoSEContext extends ParserRuleContext {
+		public TerminalNode SE() { return getToken(LightningParser.SE, 0); }
+		public ExpressaoEmSequenciaContext expressaoEmSequencia() {
+			return getRuleContext(ExpressaoEmSequenciaContext.class,0);
+		}
+		public List<InstrucaoContext> instrucao() {
+			return getRuleContexts(InstrucaoContext.class);
+		}
+		public InstrucaoContext instrucao(int i) {
+			return getRuleContext(InstrucaoContext.class,i);
+		}
+		public TerminalNode SenaoSe() { return getToken(LightningParser.SenaoSe, 0); }
+		public InstrucaoSEContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_instrucaoSE; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).enterInstrucaoSE(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).exitInstrucaoSE(this);
+		}
+	}
+
+	public final InstrucaoSEContext instrucaoSE() throws RecognitionException {
+		InstrucaoSEContext _localctx = new InstrucaoSEContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_instrucaoSE);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(106);
+			match(SE);
+			setState(107);
+			match(T__15);
+			setState(108);
+			expressaoEmSequencia();
+			setState(109);
+			match(T__16);
+			setState(110);
+			instrucao();
+			setState(113);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
+			case 1:
+				{
+				setState(111);
+				match(SenaoSe);
+				setState(112);
+				instrucao();
+				}
+				break;
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class InstrucaoVaziaContext extends ParserRuleContext {
+		public TerminalNode PontoVirgula() { return getToken(LightningParser.PontoVirgula, 0); }
+		public InstrucaoVaziaContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_instrucaoVazia; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).enterInstrucaoVazia(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LightningListener ) ((LightningListener)listener).exitInstrucaoVazia(this);
+		}
+	}
+
+	public final InstrucaoVaziaContext instrucaoVazia() throws RecognitionException {
+		InstrucaoVaziaContext _localctx = new InstrucaoVaziaContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_instrucaoVazia);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(115);
+			match(PontoVirgula);
 			}
 		}
 		catch (RecognitionException re) {
@@ -674,11 +1008,11 @@ public class LightningParser extends Parser {
 
 	public final FdiContext fdi() throws RecognitionException {
 		FdiContext _localctx = new FdiContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_fdi);
+		enterRule(_localctx, 28, RULE_fdi);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(72);
+			setState(117);
 			match(PontoVirgula);
 			}
 		}
@@ -695,7 +1029,7 @@ public class LightningParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 5:
+		case 6:
 			return expressaoUnica_sempred((ExpressaoUnicaContext)_localctx, predIndex);
 		}
 		return true;
@@ -717,26 +1051,36 @@ public class LightningParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35M\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\2"+
-		"\3\3\3\3\3\3\3\3\7\3\34\n\3\f\3\16\3\37\13\3\3\4\3\4\3\5\3\5\3\5\5\5&"+
-		"\n\5\3\6\3\6\3\7\3\7\3\7\5\7-\n\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7"+
-		"\3\7\3\7\3\7\3\7\3\7\3\7\7\7>\n\7\f\7\16\7A\13\7\3\b\3\b\3\b\3\b\5\bG"+
-		"\n\b\3\t\3\t\3\n\3\n\3\n\2\3\f\13\2\4\6\b\n\f\16\20\22\2\b\3\2\21\25\3"+
-		"\2\5\7\3\2\b\t\3\2\n\13\3\2\f\17\3\2\33\34\2N\2\24\3\2\2\2\4\27\3\2\2"+
-		"\2\6 \3\2\2\2\b\"\3\2\2\2\n\'\3\2\2\2\f,\3\2\2\2\16F\3\2\2\2\20H\3\2\2"+
-		"\2\22J\3\2\2\2\24\25\5\4\3\2\25\26\5\22\n\2\26\3\3\2\2\2\27\30\5\6\4\2"+
-		"\30\35\5\b\5\2\31\32\7\3\2\2\32\34\5\b\5\2\33\31\3\2\2\2\34\37\3\2\2\2"+
-		"\35\33\3\2\2\2\35\36\3\2\2\2\36\5\3\2\2\2\37\35\3\2\2\2 !\t\2\2\2!\7\3"+
-		"\2\2\2\"%\5\n\6\2#$\7\4\2\2$&\5\f\7\2%#\3\2\2\2%&\3\2\2\2&\t\3\2\2\2\'"+
-		"(\7\32\2\2(\13\3\2\2\2)*\b\7\1\2*-\5\16\b\2+-\7\32\2\2,)\3\2\2\2,+\3\2"+
-		"\2\2-?\3\2\2\2./\f\t\2\2/\60\t\3\2\2\60>\5\f\7\n\61\62\f\b\2\2\62\63\t"+
-		"\4\2\2\63>\5\f\7\t\64\65\f\7\2\2\65\66\t\5\2\2\66>\5\f\7\b\678\f\6\2\2"+
-		"89\t\6\2\29>\5\f\7\7:;\f\5\2\2;<\7\4\2\2<>\5\f\7\6=.\3\2\2\2=\61\3\2\2"+
-		"\2=\64\3\2\2\2=\67\3\2\2\2=:\3\2\2\2>A\3\2\2\2?=\3\2\2\2?@\3\2\2\2@\r"+
-		"\3\2\2\2A?\3\2\2\2BG\7\30\2\2CG\7\31\2\2DG\7\26\2\2EG\5\20\t\2FB\3\2\2"+
-		"\2FC\3\2\2\2FD\3\2\2\2FE\3\2\2\2G\17\3\2\2\2HI\t\7\2\2I\21\3\2\2\2JK\7"+
-		"\27\2\2K\23\3\2\2\2\b\35%,=?F";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#z\4\2\t\2\4\3\t\3"+
+		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f"+
+		"\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\3\2\3\2\3\2\3\3\3\3\3\3\3\3"+
+		"\7\3(\n\3\f\3\16\3+\13\3\3\4\3\4\3\5\3\5\3\5\5\5\62\n\5\3\6\3\6\3\7\3"+
+		"\7\3\7\7\79\n\7\f\7\16\7<\13\7\3\b\3\b\3\b\5\bA\n\b\3\b\3\b\3\b\3\b\3"+
+		"\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\7\bR\n\b\f\b\16\bU\13\b\3\t"+
+		"\3\t\3\t\3\t\5\t[\n\t\3\n\3\n\3\13\3\13\3\13\5\13b\n\13\3\f\3\f\3\f\3"+
+		"\f\3\r\6\ri\n\r\r\r\16\rj\3\16\3\16\3\16\3\16\3\16\3\16\3\16\5\16t\n\16"+
+		"\3\17\3\17\3\20\3\20\3\20\2\3\16\21\2\4\6\b\n\f\16\20\22\24\26\30\32\34"+
+		"\36\2\b\3\2\25\31\3\2\5\7\3\2\b\t\3\2\n\13\3\2\f\17\3\2!\"\2z\2 \3\2\2"+
+		"\2\4#\3\2\2\2\6,\3\2\2\2\b.\3\2\2\2\n\63\3\2\2\2\f\65\3\2\2\2\16@\3\2"+
+		"\2\2\20Z\3\2\2\2\22\\\3\2\2\2\24a\3\2\2\2\26c\3\2\2\2\30h\3\2\2\2\32l"+
+		"\3\2\2\2\34u\3\2\2\2\36w\3\2\2\2 !\5\4\3\2!\"\5\36\20\2\"\3\3\2\2\2#$"+
+		"\5\6\4\2$)\5\b\5\2%&\7\3\2\2&(\5\b\5\2\'%\3\2\2\2(+\3\2\2\2)\'\3\2\2\2"+
+		")*\3\2\2\2*\5\3\2\2\2+)\3\2\2\2,-\t\2\2\2-\7\3\2\2\2.\61\5\n\6\2/\60\7"+
+		"\4\2\2\60\62\5\16\b\2\61/\3\2\2\2\61\62\3\2\2\2\62\t\3\2\2\2\63\64\7 "+
+		"\2\2\64\13\3\2\2\2\65:\5\16\b\2\66\67\7\3\2\2\679\5\16\b\28\66\3\2\2\2"+
+		"9<\3\2\2\2:8\3\2\2\2:;\3\2\2\2;\r\3\2\2\2<:\3\2\2\2=>\b\b\1\2>A\5\20\t"+
+		"\2?A\7 \2\2@=\3\2\2\2@?\3\2\2\2AS\3\2\2\2BC\f\t\2\2CD\t\3\2\2DR\5\16\b"+
+		"\nEF\f\b\2\2FG\t\4\2\2GR\5\16\b\tHI\f\7\2\2IJ\t\5\2\2JR\5\16\b\bKL\f\6"+
+		"\2\2LM\t\6\2\2MR\5\16\b\7NO\f\5\2\2OP\7\4\2\2PR\5\16\b\6QB\3\2\2\2QE\3"+
+		"\2\2\2QH\3\2\2\2QK\3\2\2\2QN\3\2\2\2RU\3\2\2\2SQ\3\2\2\2ST\3\2\2\2T\17"+
+		"\3\2\2\2US\3\2\2\2V[\7\36\2\2W[\7\37\2\2X[\7\34\2\2Y[\5\22\n\2ZV\3\2\2"+
+		"\2ZW\3\2\2\2ZX\3\2\2\2ZY\3\2\2\2[\21\3\2\2\2\\]\t\7\2\2]\23\3\2\2\2^b"+
+		"\5\26\f\2_b\5\32\16\2`b\5\34\17\2a^\3\2\2\2a_\3\2\2\2a`\3\2\2\2b\25\3"+
+		"\2\2\2cd\7\20\2\2de\5\30\r\2ef\7\21\2\2f\27\3\2\2\2gi\5\24\13\2hg\3\2"+
+		"\2\2ij\3\2\2\2jh\3\2\2\2jk\3\2\2\2k\31\3\2\2\2lm\7\32\2\2mn\7\22\2\2n"+
+		"o\5\f\7\2op\7\23\2\2ps\5\24\13\2qr\7\33\2\2rt\5\24\13\2sq\3\2\2\2st\3"+
+		"\2\2\2t\33\3\2\2\2uv\7\35\2\2v\35\3\2\2\2wx\7\35\2\2x\37\3\2\2\2\f)\61"+
+		":@QSZajs";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -23,6 +23,10 @@ atribuivel
     :   ID
     ;
 
+expressaoEmSequencia
+    :   expressaoUnica (',' expressaoUnica)*
+    ;
+
 expressaoUnica
     :   expressaoUnica ('*' | '/' | '%') expressaoUnica
     |   expressaoUnica ('+' | '-') expressaoUnica
@@ -45,6 +49,28 @@ numeroLiteral
     |   RealLiteral
     ;
     
+instrucao
+    :   bloco
+    |   instrucaoSE
+    |   instrucaoVazia
+    ;
+
+bloco
+    : '{' listaDeInstrucoes '}'
+    ;
+
+listaDeInstrucoes
+    : instrucao+
+    ;
+
+instrucaoSE
+    :   SE '(' expressaoEmSequencia ')' instrucao (SenaoSe instrucao)?
+    ;
+
+instrucaoVazia
+    :   PontoVirgula
+    ;
+
 fdi:    PontoVirgula;
 
 // --------------------------------------------------------
@@ -56,6 +82,9 @@ INTEIRO:                'inteiro';
 CADEIA:                 'cadeia';
 CARACTER:               'caracter';
 REAL:                   'real';
+
+SE:                     'se';
+SenaoSe:                'senaose';
 
 /* BooleanoLiteral */
 BooleanoLiteral:        'true' | 'false';
