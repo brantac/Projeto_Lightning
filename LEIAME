@@ -1,0 +1,63 @@
+# Lightning
+
+Projeto de uma linguagem para a disciplina de Compiladores da PUCSP-2020.
+
+## Introdução
+
+Seguem as instruções para construir e executar o protótipo do compilador.
+
+### Pré-requisitos
+
+Plataforma Java 11, biblioteca ANTLR4 e ant.
+
+### Instalação
+
+Executar o alvo `jar`:
+
+~~~
+ant jar
+~~~
+
+## Decisões Arquiteturais
+
+1. Em termos arquiteturais, os componentes encontram-se na pasta `lightning`.
+
+2. A partir da gramática, geram-se os componentes de ANTLR4 na pasta `lightning/sint`.
+
+3. O padrão *visitante* foi utilizado como estratégia de desacoplamento entre o analisador sintático e as regras semânticas.
+
+## Ciclo de Desenvolvimento
+
+1. Refinar a gramática "antlr4/Lightning.g4".
+
+2. Refinar os procedimentos semânticos em "src/RegrasLightning.java".
+
+3. Observar os resultados dos casos de uso com "ant".
+
+## Erros e Defeitos
+
+1. Deve-se usar a opção `-visitor` da ANTLR4.
+
+2. RegrasLightning:: deve implementar a vistação a partir da raiz.
+
+3. RegrasLightning:: a operação aritmética depende do valor da variável "op", introduzida na gramática "Lightning.g4".
+
+4. RegrasLightning:: deve-se adicionar o método "visitInteiro" para evitar a duplicação de código que estava no método "visitExpressaoAditiva".
+
+## Casos de uso
+
+Executar o alvo `run` para empacotar o mostrar o resultado do processamento do programa "test/cenario-01.light":
+
+~~~
+ant run
+~~~
+
+Ou, então, diretamente pela linha de comando:
+
+~~~
+java -jar lightning-0.0.1.jar test/cenario-01.light
+~~~
+
+## Licença
+
+Este projeto está sob a licença MIT.

@@ -29,7 +29,7 @@ expressaoEmSequencia
 
 expressaoUnica
     :   expressaoUnica ('*' | '/' | '%') expressaoUnica             #ExpressaoMultiplicativa
-    |   expressaoUnica ('+' | '-') expressaoUnica                   #ExpressaoAditiva
+    |   expressaoUnica op=('+' | '-') expressaoUnica                #expressaoAditiva
     |   expressaoUnica ('==' | '!=') expressaoUnica                 #ExpressaoDeIgualdade
     |   expressaoUnica ('<' | '>' | '<=' | '>=') expressaoUnica     #ExpressaoDeRelacao
     |   <assoc=right> expressaoUnica '=' expressaoUnica             #ExpressaoDeAtribuicao
@@ -45,8 +45,8 @@ literal
     ;
 
 numeroLiteral
-    :   InteiroLiteral
-    |   RealLiteral
+    :   InteiroLiteral  #inteiro
+    |   RealLiteral     #real
     ;
     
 instrucao
